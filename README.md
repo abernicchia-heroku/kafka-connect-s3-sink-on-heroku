@@ -1,5 +1,5 @@
 # kafka-connect-s3-sink-on-heroku
-proof-of-concept of Kafka Connect with S3 sink running on Heroku
+proof-of-concept of Kafka Connect with S3 sink running on a Heroku Private Space
 
 ## Disclaimer
 The author of this article makes any warranties about the completeness, reliability and accuracy of this information. **Any action you take upon the information of this website is strictly at your own risk**, and the author will not be liable for any losses and damages in connection with the use of the website and the information provided. **None of the items included in this repository form a part of the Heroku Services.**
@@ -45,7 +45,7 @@ The author of this article makes any warranties about the completeness, reliabil
     heroku kafka:topics:create s3_topic --partitions 10 --replication-factor 3 -a HEROKU_APPNAME
     ```
 
-6. Start your web dynos - if you receive R10 error, due to Kafka Connect taking longer than 60 seconds to bind to its assigned $PORT use the [Heroku boot_timeout tool])https://tools.heroku.support/limits/boot_timeout) to increase the default timeout limit
+6. Start your web dynos
 
 7. Create the S3 Sink Connector
     ```shell

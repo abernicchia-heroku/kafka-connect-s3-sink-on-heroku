@@ -29,9 +29,7 @@ USER ${USERNAME}
 # Set required and default properties
 # ------------------------------------------------------------------------------
 ENV CONNECT_CUB_KAFKA_TIMEOUT=300
-#ENV CONNECT_BOOTSTRAP_SERVERS="kafka:29092"
-ENV CONNECT_REST_ADVERTISED_HOST_NAME=kafka-connect
-#ENV CONNECT_REST_PORT=8083
+
 ENV CONNECT_GROUP_ID=heroku-kafka-connect-group-01
 ENV CONNECT_CONFIG_STORAGE_TOPIC=_heroku-kafka-connect-group-01-configs
 ENV CONNECT_OFFSET_STORAGE_TOPIC=_heroku-kafka-connect-group-01-offsets
