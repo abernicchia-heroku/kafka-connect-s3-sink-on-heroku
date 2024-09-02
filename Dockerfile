@@ -6,9 +6,7 @@ USER root
 # it parent image derives from a RedHat image
 RUN yum -y install vim findutils
 
-# switch back to appuser (default USER from confluentinc/cp-kafka-connect)
 ARG USERNAME="appuser"
-USER ${USERNAME}
 ARG HOME="/home/appuser"
 
 # ------------------------------------------------------------------------------
@@ -17,8 +15,15 @@ ARG HOME="/home/appuser"
 
 # Copy over our start.sh script that's in our repository
 # and store it in the docker user's home directory.
-COPY --chmod=754 --chown=${USERNAME}:${USERNAME} start.sh ${HOME}/start.sh
-COPY --chmod=754 --chown=${USERNAME}:${USERNAME} certificates-setup.sh ${HOME}/certificates-setup.sh
+COPY start.sh ${HOME}/start.sh
+COPY certificates-setup.sh ${HOME}/certificates-setup.sh
+
+# COPY --chown/chmod requires BuildKit that cannot be used to build the image on Heroku
+RUN chmod u+x ${HOME}/start.sh ${HOME}/certificates-setup.sh && \
+      chown ${USERNAME}.${USERNAME} ${HOME}/start.sh ${HOME}/certificates-setup.sh
+
+# switch back to appuser (default USER from confluentinc/cp-kafka-connect)
+USER ${USERNAME}
 
 # ------------------------------------------------------------------------------
 # Set required and default properties
