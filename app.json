@@ -43,7 +43,7 @@
         }
     },
     "formation": {
-        "kafka-connect-s3-distributed": {
+        "web": {
             "quantity": 1,
             "size": "private-m"
         }
