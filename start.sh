@@ -4,7 +4,7 @@ set -e
 
 echo "Configuring certificates"
 # the dot . is required to inherit the CONNECT_ env vars exported by the script
-. ${HOME}/certificates-setup.sh
+. /home/appuser/certificates-setup.sh
 
 # export $PORT
 export CONNECT_REST_PORT="${PORT:-8083}"
