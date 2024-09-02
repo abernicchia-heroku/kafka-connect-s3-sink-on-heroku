@@ -26,7 +26,7 @@ The author of this article makes any warranties about the completeness, reliabil
     heroku apps:stacks:set --app HEROKU_APPNAME container
     git push heroku main
     ```
-2. Attach Apache Kafka on Heroku add-on to your app. By default it will create a KAFKA_URL environment variable, with a KAFKA suffix, but if you have used another name while attaching it to the app (e.g. MYKAFKA), set a KAFKA_ADDON environment with that value as well (e.g. `heroku config:set KAFKA_ADDON=MYKAFKA`)
+2. Attach the [Apache Kafka on Heroku add-on](https://elements.heroku.com/addons/heroku-kafka) to your app. By default it will create a KAFKA_URL environment variable, with a KAFKA suffix, but if you have used another name while attaching it to the app (e.g. MYKAFKA), set a KAFKA_ADDON environment with that value as well (e.g. `heroku config:set KAFKA_ADDON=MYKAFKA`)
 
 3. Create an AWS S3 bucket (or use an existing one) - you can use one of the available [Heroku Data Stores add-ons](https://elements.heroku.com/addons#data-stores)
 
@@ -37,14 +37,15 @@ The author of this article makes any warranties about the completeness, reliabil
     heroku kafka:topics:create connect-configs-cluster4s3 --partitions 1 -a HEROKU_APPNAME
     heroku kafka:topics:create connect-cluster4s3 --partitions 3 -a HEROKU_APPNAME
     ```
-5. Create the topics required by the S3 Sink Connector, for exmaple:
+5. Create the topics required by the S3 Sink Connector, for example:
     ```shell
     heroku kafka:topics:create connect-configs-s3 --partitions 1 --replication-factor 3 --compaction -a HEROKU_APPNAME
     heroku kafka:topics:create connect-offsets-s3 --partitions 50 --replication-factor 3 -a HEROKU_APPNAME
     heroku kafka:topics:create connect-status-s3 --partitions 10 --replication-factor 3 -a HEROKU_APPNAME
     heroku kafka:topics:create s3_topic --partitions 10 --replication-factor 3 -a HEROKU_APPNAME
     ```
-6. Start your web dynos
+    
+6. Start your web dynos - if you receive R10 error, due to Kafka Connect taking longer than 60 seconds to bind to its assigned $PORT use the [Heroku boot_timeout tool])https://tools.heroku.support/limits/boot_timeout) to increase the default timeout limit
 
 7. Create the S3 Sink Connector
     ```shell
