@@ -47,5 +47,8 @@
             "quantity": 1,
             "size": "private-m"
         }
-    }
+    },
+    "addons": [
+      "papertrail"
+    ]
 }
