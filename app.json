@@ -43,7 +43,7 @@
         }
     },
     "formation": {
-        "runner": {
+        "kafka-connect-s3-distributed": {
             "quantity": 1,
             "size": "private-m"
         }

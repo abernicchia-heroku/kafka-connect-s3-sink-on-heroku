@@ -59,5 +59,5 @@ ENV CONNECT_PLUGIN_PATH='/usr/share/java,/usr/share/confluent-hub-components/,/d
 # https://github.com/robcowart/cp-kafka-connect-custom - latest release on the 1st September 2024 5.4.1
 RUN /bin/confluent-hub install --no-prompt confluentinc/kafka-connect-s3:5.4.1
 
-CMD ["${HOME}/start.sh"]
+CMD ["/home/appuser/start.sh"]
 
