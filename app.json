@@ -1,17 +1,45 @@
 {
-    "name": "heroku-github-actions-runner",
-    "description": "Heroku Docker GitHub Actions Runner",
-    "repository": "https://github.com/abernicchia-heroku/heroku-github-actions-runner.git",
-    "keywords": ["heroku", "github", "actions", "workflow", "self-hosted", "runner", "heroku"],
+    "name": "kafka-connect-s3-sink-on-heroku",
+    "description": "Kafka Connect S3 Sink running on Heroku",
+    "repository": "https://github.com/abernicchia-heroku/kafka-connect-s3-sink-on-heroku.git",
+    "keywords": ["heroku", "apache kafka", "S3", "kafka connect"],
     "stack": "container",
     "env": {
-        "GITHUB_ORGANIZATION": {
+        "TRUSTSTORE_PASSWORD": {
             "required": true,
-            "description": "GitHub organization for which to attach our Heroku dynos as GitHub Action runners."
+            "description": "trust store password to manage certificates to connect to Apache Kafka on Heroku"
         },
-        "GITHUB_ACCESS_TOKEN": {
+        "KEYSTORE_PASSWORD": {
             "required": true,
-            "description": "Personal access token with 'admin:org' and 'repo' scopes. Used to attach Heroku dynos as GitHub Action runners."
+            "description": "key store password to manage certificates to connect to Apache Kafka on Heroku"
+        },
+        "CONNECT_GROUP_ID": {
+            "required": true,
+            "description": "Kafka Connect group ID",
+            "value": "connect-cluster4s3-id"
+        },
+        "CONNECT_CONFIG_STORAGE_TOPIC": {
+            "required": true,
+            "description": "Kafka Connect config.storage.topic - create it using heroku kafka:topics:create <topic name> --partitions 3 -a <app name>",
+            "value": "connect-configs-cluster4s3"
+        },
+        "CONNECT_OFFSET_STORAGE_TOPIC": {
+            "required": true,
+            "description": "Kafka Connect offset.storage.topic - create it using heroku kafka:topics:create <topic name> --partitions 3 -a <app name>",
+            "value": "connect-offsets-cluster4s3"
+        },
+        "CONNECT_STATUS_STORAGE_TOPIC": {
+            "required": true,
+            "description": "Kafka Connect status.storage.topic - create it using heroku kafka:topics:create <topic name> --partitions 3 -a <app name>",
+            "value": "connect-status-cluster4s3"
+        },
+        "AWS_ACCESS_KEY_ID": {
+            "required": true,
+            "description": "It's required by the S3 Sink connector"
+        },
+        "AWS_SECRET_KEY": {
+            "required": true,
+            "description": "It's required by the S3 Sink connector"
         }
     },
     "formation": {
