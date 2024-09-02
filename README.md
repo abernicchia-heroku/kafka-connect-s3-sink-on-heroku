@@ -44,12 +44,12 @@ The author of this article makes any warranties about the completeness, reliabil
     heroku kafka:topics:create connect-status-s3 --partitions 10 --replication-factor 3 -a HEROKU_APPNAME
     heroku kafka:topics:create s3_topic --partitions 10 --replication-factor 3 -a HEROKU_APPNAME
     ```
-    
+
 6. Start your web dynos - if you receive R10 error, due to Kafka Connect taking longer than 60 seconds to bind to its assigned $PORT use the [Heroku boot_timeout tool])https://tools.heroku.support/limits/boot_timeout) to increase the default timeout limit
 
 7. Create the S3 Sink Connector
     ```shell
-    curl -X POST https://<your HEROKU APP URL>:8083/connectors -H "Content-Type: application/json" \
+    curl -X POST https://<your HEROKU APP URL>/connectors -H "Content-Type: application/json" \
     -d '{
             "name": "s3-sink",
             "config": {

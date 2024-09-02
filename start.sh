@@ -8,6 +8,7 @@ echo "Configuring certificates"
 
 # export $PORT
 export CONNECT_REST_PORT="${PORT:-8083}"
+env
 
 # export BOOTSTRAP_SERVERS
 kafka_addon_name="${KAFKA_ADDON:-KAFKA}"
