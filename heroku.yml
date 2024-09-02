@@ -4,7 +4,7 @@
 # https://devcenter.heroku.com/articles/build-docker-images-heroku-yml
 build:
   docker:
-    runner: Dockerfile
+    web: Dockerfile
 
 # Note, in private spaces the 'run:' setting is ignored in heroku.yml.
 # Instead, Heroku uses the 'CMD' or `ENTRYPOINT` setting in your Dockerfile.
