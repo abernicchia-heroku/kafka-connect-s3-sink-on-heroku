@@ -47,14 +47,14 @@ The author of this article makes any warranties about the completeness, reliabil
 
 6. Start your web dynos
 
-7. Create the S3 Sink Connector
+7. Create the S3 Sink Connector, including some properties, for example:
     ```shell
     curl -X POST https://<your HEROKU APP URL>/connectors -H "Content-Type: application/json" \
     -d '{
             "name": "s3-sink",
             "config": {
                 "connector.class": "io.confluent.connect.s3.S3SinkConnector",
-                "tasks.max": "1",
+                "tasks.max": "4",
                 "auto.create": "false",
 
                 "key.converter":"org.apache.kafka.connect.json.JsonConverter",
@@ -86,4 +86,24 @@ The author of this article makes any warranties about the completeness, reliabil
             }
     }'
     ```
+8. Create some JSON data, for example:
+    ```shell
+    kafka-console-producer.sh --bootstrap-server <KAFKA_URL> -topic s3_topic --producer.config client.properties
 
+    > {"fruit":"Apple1","size":"Large1","color":"Red1"}
+    > {"fruit":"Apple2","size":"Large2","color":"Red2"}
+    > {"fruit":"Apple3","size":"Large3","color":"Red3"}
+    ```
+
+9. Check some of the S3 files being created, for example:
+    ```shell
+    aws configure
+
+    aws s3 ls s3://<bucket name>/topics/s3_topic/
+    aws s3 cp s3://<bucket name>/s3_topic/partition=9/s3_topic+9+0000000000.json /tmp/s3_topic+9+0000000000.json  
+    ```
+
+10. Monitor the status of your Kafka Connect cluster using the REST API, for example:
+    ```shell
+    curl https://<your HEROKU APP URL>/connectors/<your CONNECTOR NAME>/status | jq 
+    ```
