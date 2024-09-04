@@ -5,7 +5,7 @@ Proof-of-Concept - Running a Kafka Connect cluster with an S3 Sink Connector on 
 
 Once the Kafka Connect apps are running on Heroku you can start producing data to the topics **(1)** (see [Apache Kafka on Heroku](https://elements.heroku.com/addons/heroku-kafka)) that will be received and managed by the Kafka Connect clusters **(2)** and then stored into the configured S3 bucket **(3)**.<br/>
 
-![Kafka Connect S3 Sink on Heroku](images/kafka-connect-s3-sink-on-heroku.png)
+![Kafka Connect S3 Sink on Heroku](images/kafka-connect-s3-sink-on-heroku.jpg)
 
 
 ## Disclaimer
